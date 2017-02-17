@@ -35,6 +35,7 @@ DELSTRING2="</b>"
 DEFPLAYER="mplayer -really-quiet -ao alsa"
 PLAYER="${PLAYER:-$DEFPLAYER}"
 LC_CTYPE=C
+APIKEY = "ae8e6905155541448703eb8ba565b6c6"
 
 if [ $(uname) = "Darwin" ]
 	then
@@ -123,8 +124,8 @@ while [ "$nds" != 0 ]
 	do
 	# shellcheck disable=SC2019
 	MANNAGGIA="Mannaggia $(curl -s "www.santiebeati.it/$(</dev/urandom tr -dc A-Z|head -c1)/"|grep -a tit|cut -d'>' -f 4-9|$shufCmd -n1 |awk -F "$DELSTRING1" '{print$1$2}'|awk -F "$DELSTRING2" '{print$1}' | iconv -f ISO-8859-1)"
-	MANNAGGIAURL="http://www.ispeech.org/p/generic/getaudio?text=$MANNAGGIA%2C&voice=euritalianmale&speed=0&action=convert"
-
+	MANNAGGIAURL2="http://www.ispeech.org/p/generic/getaudio?text=$MANNAGGIA%2C&voice=euritalianmale&speed=0&action=convert"
+	MANNAGGIAURL="http://api.voicerss.org/?key=$APIKEY&hl=it-it&src=$MANNAGGIA%2C"
 	if [ "$wallflag" = true ]
 		then
 		pot=$(( nds % 50 ))
